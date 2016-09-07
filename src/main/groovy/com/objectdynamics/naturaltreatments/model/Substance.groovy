@@ -10,6 +10,7 @@ class Substance {
   int id;
   String source;
   String extraction;
-  List<Integer> activeCompounds;
-
+  List<Molecule> activeCompounds;
+  long sizeInNanoMetres;
 }
+
