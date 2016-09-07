@@ -8,4 +8,6 @@ class Molecule {
   int id;
   List<String> biologicalInteractions;
   List<String> sources;
+  String formula;
+  Dimensions dimensions;
 }
