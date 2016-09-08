@@ -1,3 +1,6 @@
+import com.objectdynamics.naturaltreatments.services.ConditionService
+import com.objectdynamics.naturaltreatments.services.SubstanceService
+import com.objectdynamics.naturaltreatments.services.TreatmentService
 import com.peopletechnologies.onlinestore.db.DBAccess
 import com.peopletechnologies.onlinestore.rest.CategoryResource
 import com.peopletechnologies.onlinestore.rest.MediaResource
@@ -52,55 +55,25 @@ beans {
   }
 
   /////////////////////////////////////////////////////////////////
-  //// Discount
-  /////////////////////////////////////////////////////////////////
-  buyXofAgetYofAFree(BuyXofAgetYofAFree){ beanDefinition ->
-    beanDefinition.constructorArgs = [   ]
-  }
-
-  discountProcessor(DiscountProcessor){beanDefinition ->
-    beanDefinition.constructorArgs = [
-      [
-        buyXofAgetYofAFree: BuyXofAgetYofAFree
-      ], ref('dbAccess')
-    ]
-  }
-
-  /////////////////////////////////////////////////////////////////
   //// Services
   /////////////////////////////////////////////////////////////////
 
-  userService(UserService){ beanDefinition ->
-    beanDefinition.constructorArgs =[ref('mongoTemplate')]
+  conditionService(ConditionService){ beanDefinition ->
+    beanDefinition.constructorArgs =[ref('dbAccess')]
   }
 
-  mediaService(MediaService) { beanDefinition ->
-    beanDefinition.constructorArgs = [
-      ref('mongoTemplate'),
-      ref('gridFsTemplate')
-    ]
+  substanceService(SubstanceService) { beanDefinition ->
+    beanDefinition.constructorArgs =[ref('dbAccess')]
   }
 
-  categoryService(CategoryService){ beanDefinition ->
-    beanDefinition.constructorArgs =[ref('mongoTemplate')]
-  }
-
-  productService(ProductService){ beanDefinition ->
-    beanDefinition.constructorArgs =[
-      ref('mongoTemplate'),
-      ref('gridFsTemplate'),
-      ref('mediaService'),
-      ref('categoryService')]
-  }
-
-  paymentProcessor(PaymentProcessor){ beanDefinition ->
-    beanDefinition.constructorArgs =[ref('mongoTemplate'), ref('userService'),ref('productService')]
+  treatmentService(TreatmentService) { beanDefinition ->
+    beanDefinition.constructorArgs =[ref('dbAccess')]
   }
 
   /////////////////////////////////////////////////////////////////
   //// REST Resources
   /////////////////////////////////////////////////////////////////
-  cartResource(CartResource){ beanDefinition ->
+  substanceResource(CartResource){ beanDefinition ->
     beanDefinition.constructorArgs = [ref('userService')]
   }
 
