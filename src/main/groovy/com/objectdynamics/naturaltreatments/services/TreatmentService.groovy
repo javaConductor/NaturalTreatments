@@ -9,7 +9,7 @@ import com.objectdynamics.naturaltreatments.persistence.DBAccess
  * Created by lcollins on 9/7/2016.
  */
 class TreatmentService {
-DBAccess dbAccess;
+DBAccess dbAccess ;
 
   Treatment createTreatment( Condition c, List<Substance> substances ){
     if (!c || substances == null || substances.size() == 0){
